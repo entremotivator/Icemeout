@@ -113,7 +113,7 @@ email = st.text_input("Enter your email address to receive a confirmation:")
 
 # Payment method selection (simulation)
 st.write("### Choose Payment Method")
-payment_method = st.selectbox("Payment Method", ["Cash", Credit Card", "PayPal"])
+payment_method = st.selectbox("Payment Method", ["Cash", "Credit Card", "PayPal"])
 
 # Order confirmation button
 if st.button("Place Order"):
