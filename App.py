@@ -4,6 +4,39 @@ import streamlit as st
 st.title("Ice Cream Flavor Menu")
 st.subheader("Customize Your Order with Delicious Flavors and Toppings")
 
+# Display full information from the photo
+st.write("### Full Menu Information:")
+st.write("""
+**Sizes & Prices:**
+- Kid: $2
+- Small: $5
+- Medium: $7
+- Large: $9
+- Quart: $15
+
+**Specials:**
+- Add our 'Ice Me Out' special for just $2 more!
+""")
+
+st.write("### Flavor Options:")
+st.write("""
+Choose from a variety of exciting flavors to create your perfect combination!
+
+1. **Ruby Red** - Rich and tangy red fruit flavor
+2. **Blueberry Bliss** - Sweet and tangy blueberries
+3. **Marvelous Mango** - Tropical mango flavor
+4. **Pusha P** - A refreshing peach burst
+5. **Rose** - Floral and delicate
+6. **Swedish Fish Candy** - A nostalgic candy flavor
+7. **Green Goblin** - Sour apple delight
+8. **Jamaican Rum** - Rum with a hint of spices
+9. **Hawaiian Punch** - Tropical fruit punch flavor
+10. **Georgia Peach** - Juicy, ripe peach
+""")
+
+# Add the image of all flavors
+st.image("path_to_your_flavor_image.jpg", caption="All Available Flavors", use_column_width=True)
+
 # Sizes and prices
 sizes = {
     "Kid": 2,
@@ -11,20 +44,6 @@ sizes = {
     "Medium": 7,
     "Large": 9,
     "Quart": 15
-}
-
-# Flavors with descriptions
-flavors = {
-    "Ruby Red": "A rich, deep red fruit flavor that bursts with intensity.",
-    "Blueberry Bliss": "Sweet, tangy blueberries for a blissful treat.",
-    "Marvelous Mango": "Smooth, tropical mango flavor, perfect for sunny days.",
-    "Pusha P": "A refreshing burst of peachy goodness.",
-    "Rose": "Delicate and floral, this unique flavor adds elegance to any order.",
-    "Swedish Fish Candy": "Tastes just like your favorite chewy candy!",
-    "Green Goblin": "Sour apple meets sweet delight in this tangy combo.",
-    "Jamaican Rum": "A subtle hint of rum and tropical spices.",
-    "Hawaiian Punch": "A tropical mix of fruit flavors that refresh with every bite.",
-    "Georgia Peach": "Juicy, ripe peach flavor straight from the orchards."
 }
 
 # Topping options
@@ -48,11 +67,10 @@ for i in range(num_orders):
 
     # Flavor selection
     st.write(f"**Choose flavors for Order {i+1}**")
-    flavor_choices = st.multiselect(f"Select up to 3 flavors for Order {i+1}", list(flavors.keys()), key=f"flavor_{i}", max_selections=3)
-    
-    # Show flavor descriptions
-    for flavor in flavor_choices:
-        st.write(f"**{flavor}:** {flavors[flavor]}")
+    flavor_choices = st.multiselect(f"Select up to 3 flavors for Order {i+1}", [
+        "Ruby Red", "Blueberry Bliss", "Marvelous Mango", "Pusha P", 
+        "Rose", "Swedish Fish Candy", "Green Goblin", "Jamaican Rum", 
+        "Hawaiian Punch", "Georgia Peach"], key=f"flavor_{i}", max_selections=3)
     
     # Topping selection
     st.write(f"**Choose toppings for Order {i+1}**")
@@ -78,15 +96,6 @@ for i in range(num_orders):
 grand_total = sum([order['Price'] for order in orders])
 st.write(f"### Grand Total for All Orders: ${grand_total:.2f}")
 
-# Discounts and special offers
-if num_orders >= 3:
-    st.write("**Special Offer:** Buy 3, Get 1 Free on Kid-size orders!")
-    discount = min([order['Price'] for order in orders if order['Size'] == "Kid"], default=0)
-    if discount > 0:
-        st.write(f"Discount Applied: -${discount:.2f}")
-        grand_total -= discount
-        st.write(f"**New Grand Total After Discount:** ${grand_total:.2f}")
-
 # Option to upgrade orders to "Ice Me Out" specials
 ice_me_out_cost = 0
 for i in range(num_orders):
@@ -104,7 +113,7 @@ email = st.text_input("Enter your email address to receive a confirmation:")
 
 # Payment method selection (simulation)
 st.write("### Choose Payment Method")
-payment_method = st.selectbox("Payment Method", ["Cash", "Credit Card", "PayPal"])
+payment_method = st.selectbox("Payment Method", ["Cash", Credit Card", "PayPal"])
 
 # Order confirmation button
 if st.button("Place Order"):
@@ -145,4 +154,3 @@ st.info(
 )
 st.write("Email: **info@icecreamflavors.com**")
 st.write("Phone: **(123) 456-7890**")
-st.write("Follow us on social media: [Instagram](https://www.instagram.com), [Facebook](https://www.facebook.com), [Twitter](https://www.twitter.com)")
